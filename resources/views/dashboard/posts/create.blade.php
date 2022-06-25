@@ -16,7 +16,7 @@
     <h1>create new post!</h1>
   </div>
   <div class="col-md-10 p-2">
-    @if(session()->has("error"))
+    @if(session("error"))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       {{ session("error") }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

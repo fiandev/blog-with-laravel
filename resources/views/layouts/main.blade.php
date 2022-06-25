@@ -26,8 +26,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" type="text/javascript" charset="utf-8"></script>
-     <script src='//cdn.jsdelivr.net/npm/eruda'></script>
-     <script>eruda.init();</script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){      
+       $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').remove();
+       $('.disclaimer').remove();
+      }); 
+    </script>
      @yield("script")
   </body>
 </html>

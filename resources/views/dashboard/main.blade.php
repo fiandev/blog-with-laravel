@@ -30,12 +30,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+   <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){      
+       $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').remove();
+       $('.disclaimer').remove();
+      }); 
+    </script>
    <!-- script for dashboard page -->
    <script src="/js/dashboard.js"></script>
-   <!-- debug eruda -->
-   <script src='//cdn.jsdelivr.net/npm/eruda'></script>
-   <script>eruda.init();</script>
-   
    <!-- custom script -->
    @yield("script")
   </body>
