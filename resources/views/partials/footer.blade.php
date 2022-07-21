@@ -39,3 +39,7 @@ $categories = Category::all()->load("posts");
     &copy; <span>2022</span> | MyBlog
   </div>
 </div>
+
+
+<script src='//cdn.jsdelivr.net/npm/eruda'></script>
+  <script>eruda.init();</script>

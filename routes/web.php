@@ -8,9 +8,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AdminCategoriesController;
 use App\Http\Controllers\DashboardProfileController;
+use App\Http\Controllers\AdminUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,20 +57,21 @@ Route::get("/login", [LoginController::class, "index"])->name("login")->middlewa
 Route::post("/login", [LoginController::class, "authenticate"]);
 Route::post("/logout", [LoginController::class, "logout"]);
 
-Route::get("/dashboard/", function (){
-  return view("dashboard.index");
-})->middleware("auth");
+Route::get("/dashboard/", [DashboardController::class, "index"])->middleware("auth");
 Route::get("/dashboard/posts/checkSlug", [DashboardPostController::class, "checkSlug"])->middleware("auth");
-Route::resource("/dashboard/posts", DashboardPostController::class)->middleware("auth");
+Route::resource("/dashboard/posts", DashboardPostController::class)->middleware("member");
 
-Route::get("/dashboard/profile", [DashboardProfileController::class, "index"])->middleware("auth");
+Route::get("/dashboard/profile", [DashboardProfileController::class, "show"])->middleware("auth");
+Route::get("/dashboard/profile/edit", [DashboardProfileController::class, "edit"])->middleware("auth");
 Route::post("/dashboard/profile", [DashboardProfileController::class, "update"])->middleware("auth");
+Route::get("/authors/profile/{user:slug}", [DashboardProfileController::class, "shared"])->middleware("member");
 
 Route::resource("/dashboard/categories", AdminCategoriesController::class)->except("show")->middleware("admin");
 
+Route::resource("/dashboard/users", AdminUserController::class)->middleware("admin");
+
 Route::get("/register", [RegisterController::class, "index"])->middleware("guest");
 Route::post("/register", [RegisterController::class, "store"]);
-
 
 
 
@@ -82,6 +85,21 @@ Route::get('post-images/{filename}', function($filename){
 
     $file = File::get($path);
     $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+Route::get('/{path}', function($path){
+    $path = str_replace("_", "/", $path);
+    $pathfile = storage_path('app/public/' .$path);
+    if (!File::exists($pathfile)) {
+        abort(404);
+    }
+
+    $file = File::get($pathfile);
+    $type = File::mimeType($pathfile);
 
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);

@@ -7,16 +7,16 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-between text-capitalize" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link {{ ($active == 'home') ? 'active' : ''}}" href="/home/">Home</a>
+              <a class="nav-link {{ ( Request::is('home*') || Request::is('/') ) ? 'active' : ''}}" href="/home/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ ($active == 'about') ? 'active' : ''}}" href="/about/">About</a>
+              <a class="nav-link {{ ( Request::is('about*') ) ? 'active' : ''}}" href="/about/">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ ($active == 'posts') ? 'active' : ''}}" href="/blog/">Blog</a>
+              <a class="nav-link {{ ( Request::is('posts*') || Request::is('blog*') ) ? 'active' : ''}}" href="/blog/">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ ($active == 'categories') ? 'active' : ''}}" href="/categories/">categories</a>
+              <a class="nav-link {{ ( Request::is('categories*') ) ? 'active' : ''}}" href="/categories/">categories</a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -42,7 +42,7 @@
             </li>
             @else
                 <li class="nav-item">
-                  <a class="nav-link {{ ($active == 'login') ? 'active' : ''}}" href="/login/">
+                  <a class="nav-link {{ ( Request::is('login*') ) ? 'active' : ''}}" href="/login/">
                     <i class="fa fa-login"></i>
                     login
                   </a>

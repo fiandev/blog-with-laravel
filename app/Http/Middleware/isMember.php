@@ -6,7 +6,7 @@ use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class isAdmin
+class isMember
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-      if (!auth()->check() || !auth()->user()->hasRole("administrator")) {
+      if (!auth()->check() || !auth()->user()->hasRole("member")) {
         abort(403);
       }
       return $next($request);

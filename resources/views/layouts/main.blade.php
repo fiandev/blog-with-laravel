@@ -16,9 +16,6 @@
     @include("partials/navbar")
     <div id="container" class="container mb-3">
      @yield("container")
-     <div class="d-md-none widget-role-posts d-flex text-info">
-       <i class="fa fa-plus icon"></i>
-     </div>
     </div>
     @include("partials/footer")
     

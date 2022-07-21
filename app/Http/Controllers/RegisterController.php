@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role_user;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -22,7 +23,12 @@ class RegisterController extends Controller
       ]);
       $validate["password"] = bcrypt($validate["password"]);
       
-      User::create($validate);
+      $newUser = User::create($validate);
+      /* give default role #member */
+       Role_user::create([
+         "user_id" => $newUser->id,
+         "role_id" => 3
+       ]);
       return redirect("/login/")->with("registered", "registrasion successfully!, please login.");
     }
 }

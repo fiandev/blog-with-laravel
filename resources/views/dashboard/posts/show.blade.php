@@ -21,9 +21,9 @@
          <div class="card-article">
           <div class="card-body">
             <h5 class="card-title text-center">{{ $post->title }}</h5>
-             <img src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/1200x400?'.$post->category->name }}" class="img-fluid my-2 thumbnail" alt="thumbnail {{ $post->title }}">
-            <p class="list-group-item"><span class="fw-bold">by</span> : <a href="/posts/?author={{ $post->author->username }}">{{ $post->author->username }}</a> | {{ $post->created_at->diffForHumans() }}</p>
-            <p class="list-group-item"><span class="fw-bold">category</span> : <a href="/posts/?category={{ $post->category->slug }}">{{ $post->category->name }}</a></p>
+             <img src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/1200x400?'.($post->category->name ?? 'none') }}" class="img-fluid my-2 thumbnail" alt="thumbnail {{ $post->title }}">
+            <p class="list-group-item"><span class="fw-bold">by</span> : <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->username ?? 'unknown' }}</a> | {{ $post->created_at->diffForHumans() }}</p>
+            <p class="list-group-item"><span class="fw-bold">category</span> : <a href="/posts/?category={{ $post->category->slug ?? '-' }}">{{ $post->category->name ?? 'none' }}</a></p>
             <p class="card-text">{!! $post->body !!}</p>
           </div>
         </div>

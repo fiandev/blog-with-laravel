@@ -56,7 +56,7 @@ class DashboardPostController extends Controller
         /* add newcategory */
         if (intval($validateData["category_id"]) === 0) {
           $cat = $validateData["category_id"];
-          if (Category::where("name", $validateData["category_id"])) {
+          if (Category::where("name", $validateData["category_id"])->first() !== null) {
            return back()->with("error", "category named $cat has been exist!")->withInput();
           }
           $newCategory = Category::create([
@@ -131,7 +131,10 @@ class DashboardPostController extends Controller
         $validateData["excerpt"] = Str::limit(strip_tags($request->body), 200);
         
         if ($request->hasFile("image")) {
-          storage::delete($post->image);
+          /* delete old thumbnail */
+          if ($post->image !== null) {
+            storage::delete($post->image);
+          }
           $imageUrl = $request->file("image")->store("post-images");
           $validateData["image"] = $imageUrl;
         }
@@ -139,7 +142,7 @@ class DashboardPostController extends Controller
         /* add newcategory */
         if (intval($validateData["category_id"]) === 0) {
           $cat = $validateData["category_id"];
-          if (Category::where("name", $validateData["category_id"])) {
+          if (Category::where("name", $validateData["category_id"])->count() > 0) {
            return back()->with("error", "category named $cat has been exist!")->withInput();
           }
           $newCategory = Category::create([

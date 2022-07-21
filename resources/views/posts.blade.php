@@ -4,14 +4,20 @@
 <title>MyBlog | {{ $title }}</title>
 <script type="text/javascript" charset="utf-8">
   const popularPost = {{ Illuminate\Support\Js::from($popular) }}
+  const recomendationPost = {{ Illuminate\Support\Js::from($recomendation) }}
 </script>
 @endsection
 @section("container")
+<!-- widget for mobile -->
+<div class="d-md-none widget-role-posts d-flex text-info shadow">
+ <i class="fa fa-plus icon"></i>
+</div>
+
 <div class="content row">
   <div class="col-lg-8" id="content">
     <!-- article -->
     <div class="row">
-      <h1 class="text-capitalize" style="font-size: var(--fontMobile)">{{ request("search") ? "result for : ".request("search") : $title }}
+      <h1 class="text-capitalize page-title" style="font-size: var(--fontMobile)">{{ request("search") ? "result for : ".request("search") : $title }}
       </h1>
        @if($posts->count() == 0)
        @include("partials/no-post")
@@ -27,7 +33,7 @@
                 <a class="text-white" href="/posts/?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}</a>
               </h1>
               <h1 class="bg-dark card-title position-absolute top-0 p-2" style="font-size: var(--fontMobile);opacity:.8;right:0">
-                <a class="text-white" href="/posts/?author={{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a>
+                <a class="text-white" href="/posts/?author={{ $posts[0]->author->username ?? '-' }}">{{ $posts[0]->author->name ?? '-'}}</a>
               </h1>
            </div>
          </a>
@@ -36,12 +42,12 @@
        @foreach($posts->skip(1) as $post)
          <article class="mb-3 px-2 col-md-6 col-lg-6">
            <div class="card shadow card-article">
-             <img src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/1200x400?'.($post->category->name ?? '-') }}" class="card-img-top thumbnail" style="height:150px" alt="thumbnail {{ $post->title }}">
+             <img src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/1200x400?'.($post->category->name ?? 'no image') }}" class="card-img-top thumbnail" style="height:150px" alt="thumbnail {{ $post->title }}">
              <h1 class="bg-info card-title position-absolute top-0 p-2" style="font-size: var(--fontMobile);opacity:.8;left:0">
                 <a class="text-white" href="/posts/?category={{ $post->category->name ?? '-' }}">{{ $post->category->name ?? '-' }}</a>
               </h1>
              <h1 class="bg-dark card-title position-absolute top-0 p-2" style="font-size: var(--fontMobile);opacity:.8;right:0">
-                <a class="text-white" href="/posts/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                <a class="text-white" href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a>
               </h1>
             <div class="card-body">
               <h1 class="card-title fs-6">
@@ -90,8 +96,8 @@
        <div class="post d-flex align-items-center gap-2 justify-content-between">
          <img class="side-post-thumbnail" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/150x150?'.($post->category->name ?? '-') }}" alt="" />
          <div class="detail d-flex flex-column">
-           <h1 class="side-post-title my-0">{{ $post->title }}</h1>
-           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username }}">{{ $post->author->name }}</a></p>
+           <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
+           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
          </div>
        </div>
      @endforeach
@@ -104,8 +110,8 @@
        <div class="post d-flex align-items-center gap-2 justify-content-between">
          <img class="side-post-thumbnail" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/150x150?'.($post->category->name ?? '-') }}" alt="" />
          <div class="detail d-flex flex-column">
-           <h1 class="side-post-title my-0">{{ $post->title }}</h1>
-           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username }}">{{ $post->author->name }}</a></p>
+           <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
+           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
          </div>
        </div>
      @endforeach

@@ -43,6 +43,12 @@
                 Categories
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {{ Request::is("dashboard/users*") ? "active" : ""}}" aria-current="page" href="{{ url('/dashboard') }}/users">
+                <span data-feather="user-plus"></span>
+                Users
+              </a>
+            </li>
           </ul>
         @endcan
       </div>

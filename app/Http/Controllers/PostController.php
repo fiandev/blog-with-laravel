@@ -17,6 +17,19 @@ class PostController extends Controller
       if (request("category")) {
         $title .= " in $_category";
       }
+      
+      /* parameter null */
+      if (request("category")) {
+        if (request("category") == null) {
+          abort(404);
+        }
+      }
+      if (request("author")) {
+        if (request("author") == null) {
+          abort(404);
+        }
+      }
+      // return Post::latest()->filter(request(["search", "category", "author"]))->paginate(7)->withQueryString();
       return view('posts', [
         "title" => $title,
         "active" => "posts",

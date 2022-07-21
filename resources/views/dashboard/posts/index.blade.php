@@ -28,7 +28,7 @@
         <tr>
           <td class="text-center">{{ $loop->iteration }}</td>
           <td>{{ $post->title }}</td>
-          <td>{{ $post->category->name }}</td>
+          <td>{{ $post->category->name ?? 'none' }}</td>
           <td class="d-flex gap-1">
             <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-primary"><span data-feather="edit"></span></a>

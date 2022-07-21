@@ -19,7 +19,13 @@
       {{ session("error") }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    @endif
+  @endif
+  @error("category_id")
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ $message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @enderror
     
     @if(session()->has("success"))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -43,7 +49,7 @@
              <form action="/dashboard/categories/{{ $category->slug }}" method="post" accept-charset="utf-8">
               @method("put")
               @csrf
-              <input class="input-update-categories bg-auto" type="text" name="category_id" id="category_id" value="{{ $category->name }}" />
+              <input class="border input-update-categories" type="text" name="category_id" id="category_id" value="{{ $category->name }}" />
             </form>
           </td>
           
@@ -52,7 +58,7 @@
             <form action="/dashboard/categories/{{ $category->slug }}" method="post" accept-charset="utf-8">
               @method("delete")
               @csrf
-              <button type="submit" class="badge bg-danger border-0" onclick="return confirm('are you sure?')">
+              <button type="submit" class="badge bg-danger border-0" onclick="return confirm('are you sure ?, category {{ $category->name }} will be delete!')">
                 <i data-feather="x-circle"></i>
               </button>
             </form>

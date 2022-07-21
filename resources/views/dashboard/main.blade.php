@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Dashboard | {{ auth()->user()->name }}</title>
+    <title>Dashboard | {{ auth()->user()->name ?? "" }}</title>
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" type="text/css" media="all" />
@@ -18,6 +18,9 @@
   </head>
   <body>
   @include("dashboard.layouts.nav")
+  <div class="preload">
+    <div class="loader"></div>
+  </div>
   <div class="container-fluid">
     <div class="row">
       @include("dashboard.layouts.sidenav")
@@ -32,12 +35,43 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
    <script type="text/javascript" charset="utf-8">
       $(document).ready(function(){      
+       $(".preload").remove()
        $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').remove();
        $('.disclaimer').remove();
       }); 
     </script>
    <!-- script for dashboard page -->
    <script src="/js/dashboard.js"></script>
+   <script type="text/javascript" charset="utf-8">
+     function myConfirm(title, text) {
+        swal({
+          html: true,
+          title: title,
+          text: text,
+          icon: "warning",
+          buttons: [
+            'No',
+            'Yes'
+          ]
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            swal({
+              title: "ok!",
+              text: "don't regret it!",
+              icon: "success"
+            }).then(function() {
+              return true
+            });
+          } else {
+            swal("Cancelled", "this page will be refresh! :)", "error").then(function(){
+              window.location.reload()
+            });
+          }
+        })
+      }
+   </script>
+   <script src='//cdn.jsdelivr.net/npm/eruda'></script>
+  <script>eruda.init();</script>
    <!-- custom script -->
    @yield("script")
   </body>

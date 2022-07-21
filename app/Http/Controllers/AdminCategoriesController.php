@@ -17,8 +17,8 @@ class AdminCategoriesController extends Controller
     {
         $this->authorize("admin");
         return view("dashboard.categories.index", [
-            "categories" => Category::paginate(100)
-          ]);
+          "categories" => Category::paginate(100)
+        ]);
     }
 
     /**

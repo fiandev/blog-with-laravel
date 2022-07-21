@@ -62,7 +62,7 @@
           <input value="" type="text" class="input-category form-control d-none" name="" placeholder="write new category..">
            <select name="category_id" class="form-control input-category">
             @foreach($categories as $category)
-            @if(old("category_id") == $category->id)
+            @if($post->category->id === $category->id)
             <option selected value="{{ $category->id }}">{{ $category->name }}</option>
             @else
             <option value="{{ $category->id }}">{{ $category->name }}</option>
