@@ -9,15 +9,15 @@
 @endsection
 @section("container")
 <!-- widget for mobile -->
-<div class="d-md-none widget-role-posts d-flex text-info shadow">
+<div class="d-none widget-role-posts d-flex text-info shadow">
  <i class="fa fa-plus icon"></i>
 </div>
 
 <div class="content row">
-  <div class="col-lg-8" id="content">
+  <div class="col-lg-8 mb-2 mb-lg-0" id="content">
     <!-- article -->
     <div class="row">
-      <h1 class="text-capitalize page-title" style="font-size: var(--fontMobile)">{{ request("search") ? "result for : ".request("search") : $title }}
+      <h1 class="mt-2 text-capitalize page-title" style="font-size: var(--fontLargeDesktop)">{{ request("search") ? "result for : ".request("search") : $title }}
       </h1>
        @if($posts->count() == 0)
        @include("partials/no-post")
@@ -72,9 +72,9 @@
     <!-- end pagination-->
   </div>
   <!-- sidenav -->
-  <div class="d-none col-lg-4 d-lg-flex flex-lg-column gap-3">
-    <div class="search">
-      <h1 class="text-capitalize" style="font-size: var(--fontMobile)">
+  <div class="col-12 col-lg-4 d-flex flex-column gap-3">
+    <div class="search d-none d-lg-flex flex-column">
+      <h1 class="mt-2 text-capitalize" style="font-size: var(--fontLargeDesktop)">
         Pencarian
       </h1>
       <form action="/posts/" class="d-flex gap-2  ms-auto position-relative" role="search">
@@ -88,34 +88,38 @@
         <button class="px-3 overflow-visible btn d-flex justify-content-center align-items-center btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
-    <div class="popular-posts d-flex flex-column gap-2">
-      <h1 class="text-capitalize" style="font-size: var(--fontMobile)">
-        Popular posts
-      </h1>
-      @foreach($popular as $post)
-       <div class="post d-flex align-items-center gap-2 justify-content-between">
-         <img class="side-post-thumbnail" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/150x150?'.($post->category->name ?? '-') }}" alt="" />
-         <div class="detail d-flex flex-column">
-           <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
-           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
+    
+    @if($posts->count() > 0)
+      <div class="popular-posts d-flex flex-column gap-2">
+        <h1 class="text-capitalize" style="font-size: var(--fontLargeDesktop)">
+          Popular posts
+        </h1>
+        @foreach($popular as $post)
+         <div class="post d-flex align-items-center gap-2 justify-content-lg-between">
+           <img class="side-post-thumbnail d-none d-lg-block" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/500x500'.($post->category->name ?? '-') }}" alt="" />
+           <div class="detail d-flex flex-column">
+             <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
+             <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
+           </div>
          </div>
-       </div>
-     @endforeach
-    </div>
-    <div class="recomendation-posts d-flex flex-column gap-2">
-      <h1 class="text-capitalize" style="font-size: var(--fontMobile)">
-        recomendation posts
-      </h1>
-      @foreach($recomendation as $post)
-       <div class="post d-flex align-items-center gap-2 justify-content-between">
-         <img class="side-post-thumbnail" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/150x150?'.($post->category->name ?? '-') }}" alt="" />
-         <div class="detail d-flex flex-column">
-           <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
-           <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
+       @endforeach
+      </div>
+      
+      <div class="recomendation-posts d-flex flex-column gap-2">
+        <h1 class="text-capitalize" style="font-size: var(--fontLargeDesktop)">
+          recomendation posts
+        </h1>
+        @foreach($recomendation as $post)
+         <div class="post d-flex align-items-center gap-2 justify-content-lg-between">
+           <img class="side-post-thumbnail d-none d-lg-block" src="{{ ($post->image != null) ? url($post->image) : 'https://source.unsplash.com/500x500'.($post->category->name ?? '-') }}" alt="" />
+           <div class="detail d-flex flex-column">
+             <h1 class="side-post-title my-0">{{ $post->title ?? '-' }}</h1>
+             <p class="side-post-title my-0">By <a href="/posts/?author={{ $post->author->username ?? '-' }}">{{ $post->author->name ?? '-' }}</a></p>
+           </div>
          </div>
-       </div>
-     @endforeach
-    </div>
+       @endforeach
+      </div>
+    @endif
   </div>
 </div>
 @endsection

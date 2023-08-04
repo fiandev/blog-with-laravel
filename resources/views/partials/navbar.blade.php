@@ -1,6 +1,6 @@
   <nav class="shadow navbar navbar-expand-lg navbar-dark bg-info mb-2">
       <div class="container">
-        <a class="navbar-brand" href="/">MyBlog</a>
+        <a class="navbar-brand" href="/">{{ env("APP_NAME", "blog") }}</a>
         <button class="navbar-toggler mx-2 my-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,7 +13,7 @@
               <a class="nav-link {{ ( Request::is('about*') ) ? 'active' : ''}}" href="/about/">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ ( Request::is('posts*') || Request::is('blog*') ) ? 'active' : ''}}" href="/blog/">Blog</a>
+              <a class="nav-link {{ ( Request::is('posts*') || Request::is('blog*') ) ? 'active' : ''}}" href="/posts/">posts</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {{ ( Request::is('categories*') ) ? 'active' : ''}}" href="/categories/">categories</a>

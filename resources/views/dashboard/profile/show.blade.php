@@ -20,36 +20,33 @@
     <ul class="benefits list-group list-group-flush">
       @can("member")
       <li class="list-group-item">
-        you can manage your posts
+        ✅ You can manage your posts
       </li>
       <li class="list-group-item">
-        You can see the statistics of your posts
+        ✅ You can see the statistics of your posts
       </li>
       <li class="list-group-item">
-        You can change your profile
+        ✅ You can change your profile
       </li>
       @endcan
       
       @can("mod")
       <li class="list-group-item">
-        You can see statistics of all posts
+        ✅ You can see statistics of all posts
       </li>
       @endcan
       
       @can("admin")
       <li class="list-group-item">
-        You can manage post categories
+        ✅ You can manage post categories
       </li>
       <li class="list-group-item">
-        You can manage all user accounts
+        ✅ You can manage all user accounts
       </li>
       @endcan
     </ul>
     <div class="card-body">
       <a href="{{ url('/dashboard/profile/edit') }}" class="card-link">edit profile</a>
-      <a href="{{ url('/authors/profile/'.auth()->user()->slug) }}" class="card-link">
-        share this profile
-      </a>
     </div>
   </div>
 </div>

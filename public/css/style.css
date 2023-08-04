@@ -98,6 +98,43 @@ ul, li {
 .footer .medsos {
   overflow: visible;
 }
+.widget-role-posts {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 5%;
+  left: 5%;
+  border-radius: 50%;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.widget-role-posts.active {
+  transition: 1s;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column-reverse;
+  padding: 2%;
+  height: auto;
+  width: auto;
+  overflow-x: visible;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+.widget-role-posts.active p:hover {
+  text-decoration: underline;
+}
+.side-post-thumbnail {
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+.side-post-title {
+  font-size: var(--fontDesktop);
+}
+
 /* mobile */
 @media (max-width: 575.95px){
   .card-article {
@@ -129,35 +166,8 @@ ul, li {
     border: solid .1px;
     width: 100%;
   }
-  .widget-role-posts {
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    bottom: 5%;
-    left: 5%;
-    border-radius: 50%;
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-  }
-  .widget-role-posts.active {
-    transition: 1s;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column-reverse;
-    padding: 2%;
-    height: auto;
-    width: auto;
-    overflow-x: visible;
-    border-radius: 5px;
-    text-transform: capitalize;
-  }
-  .widget-role-posts.active p:hover {
-    text-decoration: underline;
-  }
 }
+
 /* desktop md */
 @media (min-width: 576px){
   .card-article {
@@ -247,15 +257,7 @@ ul, li {
     border: solid .1px;
     width: 100%;
   }
-  .side-post-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 10%;
-  }
   .post .detail {
     width: calc(100% - 50px);
-  }
-  .side-post-title {
-    font-size: var(--fontMobile);
   }
 }

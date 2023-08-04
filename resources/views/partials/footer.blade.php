@@ -3,7 +3,7 @@ use App\Models\Category;
 $categories = Category::all()->load("posts");
 ?>
 <div class="rounded border-top border-3 border-info shadow-sm footer pt-3 container px-0">
-  <h1 class="text-center text-info footer-header mb-3">MyBlog</h1>
+  <h1 class="text-center text-info footer-header mb-3">{{ env("APP_NAME", "blog") }}</h1>
   <div class="row mx-0 px-0">
     <div class="col-md-6 footer-item d-md-flex align-items-center flex-column px-3">
       <h1>categories</h1>

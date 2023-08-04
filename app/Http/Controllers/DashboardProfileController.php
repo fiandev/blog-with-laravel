@@ -53,7 +53,7 @@ class DashboardProfileController extends Controller
       }
       
       if ($request->hasFile("photo")) {
-        $imageUrl = $request->file("photo")->store("post-images");
+        $imageUrl = $request->file("photo")->store("static");
         $validate["photo"] = $imageUrl;
       }
       User::where("id", auth()->user()->id)

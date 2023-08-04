@@ -173,3 +173,10 @@ a {
     height: 12rem;
   }
 }
+
+
+.chart-container {
+  height: fit-content;
+  min-height: 10rem;
+  max-height: 100%;
+}

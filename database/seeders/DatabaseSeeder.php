@@ -57,16 +57,14 @@ class DatabaseSeeder extends Seeder
           'password' => bcrypt("12345")
         ]);
         User::create([
-          'name' => "Roronoa Zoro",
-          'username' => "Zoro",
+          'name' => "Super Admin",
+          'username' => "admin",
           'slug' => "zoro",
-          'email' => "zoro@mugiwara.com",
+          'email' => "admin@tkjsmkawg6.my.id",
           'email_verified_at' => now(),
-          'password' => bcrypt("12345")
+          'password' => bcrypt("secret")
         ]);
-       
-        User::factory(10)->create();
-        Post::factory(100)->create();
+        
         Category::create([
             "name" => "Programming",
             "slug" => "programming"
@@ -83,6 +81,11 @@ class DatabaseSeeder extends Seeder
             "name" => "Game Development",
             "slug" => "game-development"
           ]);
+        Category::create([
+            "name" => "network engineer",
+            "slug" => "network-engineer"
+          ]);
+          
         Role::create([
             "name" => "administrator"
             ]);
@@ -92,6 +95,5 @@ class DatabaseSeeder extends Seeder
         Role::create([
             "name" => "member"
           ]);
-        Category::factory(6)->create();
     }
 }

@@ -70,7 +70,7 @@ class DashboardPostController extends Controller
         $validateData["excerpt"] = Str::limit(strip_tags($request->body), 200);
         
         if ($request->hasFile("image")) {
-          $imageUrl = $request->file("image")->store("post-images");
+          $imageUrl = $request->file("image")->store("static");
           
           $validateData["image"] = $imageUrl;
         }
@@ -135,7 +135,7 @@ class DashboardPostController extends Controller
           if ($post->image !== null) {
             storage::delete($post->image);
           }
-          $imageUrl = $request->file("image")->store("post-images");
+          $imageUrl = $request->file("image")->store("static");
           $validateData["image"] = $imageUrl;
         }
         

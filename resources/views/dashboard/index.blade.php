@@ -6,8 +6,12 @@
 </div>
 
 <div class="statistic">
-  <canvas class="" id="popularPosts"></canvas>
-  <canvas class="" id="popularCategory"></canvas>
+  <div class="chart-container">
+    <canvas class="" id="popularPosts"></canvas>
+  </div>
+  <div class="chart-container">
+    <canvas class="" id="popularCategory"></canvas>
+  </div>
 </div>
 @endsection
 

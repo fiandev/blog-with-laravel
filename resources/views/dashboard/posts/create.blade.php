@@ -51,7 +51,7 @@
         </label>
         @if(session()->has("error"))
           <input value="{{ old('category_id' ) }}" type="text" class="input-category form-control @error('category_id') is-invalid @enderror" name="category_id" placeholder="write new category..">
-          <select name="" class="form-control input-category d-none">
+          <select name="" class="form-select input-category d-none">
             @foreach($categories as $category)
               <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach

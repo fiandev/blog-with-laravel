@@ -113,3 +113,30 @@ function showRecomendationPosts(){
   $(".page-title").html(titlePage)
   console.log(recomendationPost)
 }
+
+function markdownToHtml(markdownString) {
+    // Replace bold text
+    markdownString = markdownString.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Replace italic text
+    markdownString = markdownString.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    // Replace headers
+    markdownString = markdownString.replace(/^(#+)(.*)/gm, (match, hashes, content) => {
+        const level = hashes.length;
+        return `<h${level}>${content.trim()}</h${level}>`;
+    });
+
+    // Replace lists
+    markdownString = markdownString.replace(/^\s*-\s+(.*)/gm, '<li>$1</li>');
+    markdownString = markdownString.replace(/<\/li>\s*<li>/g, '</li><li>'); // Fix for consecutive list items
+    markdownString = markdownString.replace(/^<li>(.*)<\/li>/gm, '<ul><li>$1</li></ul>');
+
+    // Replace links
+    markdownString = markdownString.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+
+    // Replace code blocks
+    markdownString = markdownString.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+
+    return markdownString;
+}

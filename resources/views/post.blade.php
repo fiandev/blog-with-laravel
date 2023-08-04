@@ -1,7 +1,8 @@
 @extends("layouts/main")
 @section("head")
-<title>Myblog | {{ $post->title }}</title>
+<title>{{ env("APP_NAME", "blog") }} | {{ $post->title }}</title>
 @endsection
+
 @section("container")
 <div class="content row">
   <div class="col-md-8 overflow-visible">
@@ -16,13 +17,38 @@
             {{ $post->category->name ?? "none" }}
           </a>
         </p>
-        <p class="card-text">{!! $post->body !!}</p>
+        
+        <hr class="my-2">
+        
+        <p id="article-content" class="card-text">{{ $post->body }}</p>
       </div>
       <div class="card-footer">
-        <a href="/blog">back to posts</a>
+        <a href="{{ url('/posts') }}">back to posts</a>
       </div>
     </div>
     </article>
   </div>
 </div>
+@endsection
+
+
+@section("css")
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+@endsection
+
+@section("script")
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>
+    $(document).ready(function (){
+      let Article = $("#article-content").text()
+      
+      console.log({
+        c: markdownToHtml(Article),
+        a: Article,
+      });
+      $("#article-content").html(markdownToHtml(Article))
+      
+      hljs.highlightAll();
+    })
+  </script>
 @endsection

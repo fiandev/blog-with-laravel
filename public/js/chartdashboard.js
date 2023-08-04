@@ -14,12 +14,14 @@ async function makeChart(ctx, type, title, datachart, datachartName, label) {
     ]
   }
   let options = {
+    responsive: true,
+    maintainAspectRatio: false,
     title: {
       display: true,
       text: "popular posts"
     },
     legend: {
-      display: true
+      display: false
     },
     sscale: {
       yAxes: [

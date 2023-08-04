@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -24,20 +25,11 @@ use App\Http\Controllers\AdminUserController;
 |
 */
 
-Route::get('/', function (){
-  return redirect("/home/");
-});
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "about",
-        "active" => "about",
-        "author" => "fian",
-        "email" => "fiandev1234@gmail.com",
-        "message" => "hi 👋"
-      ]);
-});
-Route::get('/blog', [PostController::class, "index"]);
-Route::get('/home', [PostController::class, "index"]);
+
+Route::get('/', [HomeController::class, "index"]);
+Route::get('/home', [HomeController::class, "index"]);
+Route::get('/about', [HomeController::class, "about"]);
+
 Route::get("/posts", [PostController::class, "index"]);
 Route::get("/posts/{post:slug}", [PostController::class, "show"]);
 Route::get("/categories/", [CategoryController::class, "index"]);
@@ -76,8 +68,8 @@ Route::post("/register", [RegisterController::class, "store"]);
 
 
 
-Route::get('post-images/{filename}', function($filename){
-    $path = storage_path('app/public/' . "post-images/" . $filename);
+Route::get('/static/{filename}', function($filename){
+    $path = storage_path('app/' . "static/" . $filename);
     
     if (!File::exists($path)) {
         abort(404);
@@ -91,6 +83,23 @@ Route::get('post-images/{filename}', function($filename){
 
     return $response;
 });
+
+Route::get('/post-images/{filename}', function($filename){
+    $path = storage_path('app/' . "post-images/" . $filename);
+    
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+/*
 Route::get('/{path}', function($path){
     $path = str_replace("_", "/", $path);
     $pathfile = storage_path('app/public/' .$path);
@@ -106,3 +115,4 @@ Route::get('/{path}', function($path){
 
     return $response;
 });
+*/
